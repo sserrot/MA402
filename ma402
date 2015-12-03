@@ -2,11 +2,20 @@
 
 == Introduction
 
-An analysis of
+This database shows the five types of renewable energy and their practical uses in the modern world. 
+
+== Changes to the data
+Upon first inspection of the database, we saw that there were several changes that needed to be made to make the database more intuitive and
+user friendly. We also added several connections and additional nodes to expand the database. Below is a list of the major changes we have made:
+-Improved grammar and language
+-Changed target node to transform
+-Introduced new relationship between nodes
+
 
 //console
 
-== Gettin' started
+== Getting Started
+
 
 //hide
 [source, cypher]
@@ -67,9 +76,29 @@ create _43-[:`USED_FOR`]->_22
 
 //graph 
 
+== Types of Nodes
+There are four types in this database. These types are:
+ENERGY: Energy describes a type of renewable energy. In these nodes, there is Solar Energy, Wind Power, Hydropower, Geothermal Energy, and Biofuel.
+TYPE: Type describes a source of renewable energy. ...
+APPLICATION: Application describes the real world use of each type of renewable energy. In these nodes, there is Domestic Applications, Windmills, 
+Propel Ships, Agriculture, Urban Planning, Alternative Transports, HVAC Systems, Conventional Hydroelectricity, Run-of-the-River Hydroelectricity, 
+and Pumped-Storage Hydroelectricity. 
+FUEL: Fuel desribes types of biofuel. In these nodes, there is Bioalchohols, Biodiesel, Vegetable Oil Fuel, and Syngas. 
+TRANSFORM: Transform describes different ways that the renewable sources of energy can be transformed. In these nodes, there is Electricity Production,
+Fuel Production, Ventilation, Cooling, and Heating. 
 
+== Relationships
+There are two types of relationships in this database. These types are: 
+USED_FOR: This relationship is between two nodes where one node is used as an element of the second node. 
+AS: 
+FORM: 
 
-== Names of mainstream renewables-energies
+== Relationships between Nodes
+Each node to connected to different nodes by one of the relationships described above. 
+
+== Queries
+
+=== Names of mainstream renewables-energies
 
 [source, cypher]
 ----
@@ -80,7 +109,7 @@ It is a well-known fact that great majority of people only knows five kinds of r
 
 //table
 
-== What targets they chase?
+=== What targets they chase?
 
 As The Law of Conservation of Energy states, energy may neither be created nor destroyed but can change form! The next query show the most popular transformations.
 
@@ -102,6 +131,8 @@ match (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, 
 
 //table
 
-Peace!
+== Takeaways from this Database
+
+
 
 

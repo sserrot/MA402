@@ -4,7 +4,7 @@
 
 This database shows the five types of renewable energy and their practical uses in the modern world. 
 
-==Changes to the data
+== Changes to the data
 Upon first inspection of the database, we saw that there were several changes that needed to be made to make the database more intuitive and
 user friendly. We also added several connections and additional nodes to expand the database. Below is a list of the major changes we have made:
 -Improved grammar and language
@@ -76,7 +76,7 @@ create _43-[:`USED_FOR`]->_22
 
 //graph 
 
-==Types of Nodes
+== Types of Nodes
 There are four types in this database. These types are:
 ENERGY: Energy describes a type of renewable energy. In these nodes, there is Solar Energy, Wind Power, Hydropower, Geothermal Energy, and Biofuel.
 TYPE: Type describes a source of renewable energy. ...
@@ -87,16 +87,16 @@ FUEL: Fuel desribes types of biofuel. In these nodes, there is Bioalchohols, Bio
 TRANSFORM: Transform describes different ways that the renewable sources of energy can be transformed. In these nodes, there is Electricity Production,
 Fuel Production, Ventilation, Cooling, and Heating. 
 
-==Relationships
+== Relationships
 There are two types of relationships in this database. These types are: 
 USED_FOR: This relationship is between two nodes where one node is used as an element of the second node. 
 AS: 
 FORM: 
 
-==Relationships between Nodes
+== Relationships between Nodes
 Each node to connected to different nodes by one of the relationships described above. 
 
-==Queries
+== Queries
 
 === Names of mainstream renewables-energies
 
@@ -131,7 +131,7 @@ match (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, 
 
 //table
 
-==Takeaways from this Database
+== Takeaways from this Database
 
 
 

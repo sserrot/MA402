@@ -53,7 +53,6 @@ create wind-[:`USED_FOR`]->electricity
 create wind-[:`USED_FOR`]->ships
 create wind-[:`USED_FOR`]->windmill
 create hydro-[:`USED_FOR`]->electricity
-create hydro-[:`USED_FOR`]->electricity
 create conventionalhydro-[:`TYPE`]->hydro
 create rotrhydro-[:`TYPE`]->hydro
 create pshydro-[:`TYPE`]->hydro
@@ -70,7 +69,6 @@ create fuel-[:`AS`]->syngas
 create vent-[:`USED_FOR`]->HVAC
 create cooling-[:`USED_FOR`]->HVAC
 create heating-[:`USED_FOR`]->HVAC
-create bio-[:`USED_FOR`]->heating
 create bio-[:`USED_FOR`]->cooling
 create bio-[:`USED_FOR`]->electricity
 ----

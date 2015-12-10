@@ -108,31 +108,32 @@ Each node is connected to a different node by one of the relationships described
 
 == Queries
 
-=== Names of mainstream renewables-energies
+=== Names of Mainstream Renewables Energies
 
 [source, cypher]
 ----
 match (n:Energy) return distinct n.name as renewableEnergy;
 ----
 
-It is a well-known fact that great majority of people only knows five kinds of renewable-energies or even less. Before continue reading this Gist, can you say more than five? Exactly, you can't. Nobody! 
+This query lists all of the energy nodes found in this database. These are the most common renewable energy sources used in the world. 
+
 
 //table
 
-=== What targets they chase?
+=== Transformations
 
-As The Law of Conservation of Energy states, energy may neither be created nor destroyed but can change form! The next query show the most popular transformations.
+Often renewable energies have to be transformed to be useful. This table shows the transformations that we have covered in this database. 
 
 [source, cypher]
 ----
-match (n:Energy)-[*1..2]-(t:Transform) return distinct t.name as target, collect(n.name) as renewablesEnergies;
+match (n:Energy)-[*1..2]-(t:Transform) return distinct t.name as transform, collect(n.name) as renewablesEnergies;
 ----
 
 //table
 
-== Common uses
+== Common Uses
 
-Okay, so much random words but... what they do?
+To be useful, renewable energy must have applications in the modern world. This table shows what applications each energy type has. 
 
 [source, cypher]
 ----
@@ -142,7 +143,7 @@ match (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, 
 //table
 
 == Takeaways from this Database
-This databse allows users to see some of the different real world applications of the different forms of renewable energies.
+
 
 
 

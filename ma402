@@ -125,7 +125,7 @@ As The Law of Conservation of Energy states, energy may neither be created nor d
 
 [source, cypher]
 ----
-match (n:Energy)-[*1..2]-(t:Target) return distinct t.name as target, collect(n.name) as renewablesEnergies;
+match (n:Energy)-[*1..2]-(t:Transform) return distinct t.name as target, collect(n.name) as renewablesEnergies;
 ----
 
 //table

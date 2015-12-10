@@ -27,9 +27,9 @@ create (geo:`Energy` {`name`:"Geothermal Energy"})
 create (bio:`Energy` {`name`:"Biofuel"})
 create (domestic:`Application` {`name`:"Domestic applications"})
 create (windmill:`Application` {`name`:"Windmills"})
-create (electricity:`Target` {`name`:"Electricity production"})
+create (electricity:`Trasform` {`name`:"Electricity production"})
 create (ships:`Application` {`name`:"Propel ships"})
-create (fuel:`Target` {`name`:"Fuel production"})
+create (fuel:`Transform` {`name`:"Fuel production"})
 create (agriculture:`Application` {`name`:"Agriculture"})
 create (urban:`Application` {`name`:"Urban planning"})
 create (alternative:`Application` {`name`:"Alternative transports"})
@@ -38,12 +38,12 @@ create (bioalcohols:`Fuel` {`name`:"Bioalcohols"})
 create (biodiesel:`Fuel` {`name`:"Biodiesel"})
 create (vegetable:`Fuel` {`name`:"Vegetable oil fuel"})
 create (syngas:`Fuel` {`name`:"Syngas"})
-create (vent:`Target` {`name`:"Ventilation"})
-create (cooling:`Target` {`name`:"Cooling"})
-create (heating:`Target` {`name`:"Heating"})
-create (conventionalhydro:`Application` {`name`:"Conventional hydroelectricity"})
-create (rotrhydro:`Application` {`name`:"Run-of-the-river hydroelectricity"})
-create (pshydro:`Application` {`name`:"Pumped-storage hydroelectricity"})
+create (vent:`Transform` {`name`:"Ventilation"})
+create (cooling:`Transform` {`name`:"Cooling"})
+create (heating:`Transform` {`name`:"Heating"})
+create (conventionalhydro:`Form` {`name`:"Conventional hydroelectricity"})
+create (rotrhydro:`Form` {`name`:"Run-of-the-river hydroelectricity"})
+create (pshydro:`Form` {`name`:"Pumped-storage hydroelectricity"})
 create solar-[:`USED_FOR`]->alternative
 create solar-[:`USED_FOR`]->urban
 create solar-[:`USED_FOR`]->agriculture
@@ -54,9 +54,9 @@ create wind-[:`USED_FOR`]->ships
 create wind-[:`USED_FOR`]->windmill
 create hydro-[:`USED_FOR`]->electricity
 create hydro-[:`USED_FOR`]->electricity
-create hydro-[:`AS`]->conventionalhydro
-create hydro-[:`AS`]->rotrhydro
-create hydro-[:`AS`]->pshydro
+create conventionalhydro-[:`TYPE`]->hydro
+create rotrhydro-[:`TYPE`]->hydro
+create pshydro-[:`TYPE`]->hydro
 create geo-[:`USED_FOR`]->electricity
 create bio-[:`USED_FOR`]->heating
 create bio-[:`USED_FOR`]->fuel
@@ -70,6 +70,9 @@ create fuel-[:`AS`]->syngas
 create vent-[:`USED_FOR`]->HVAC
 create cooling-[:`USED_FOR`]->HVAC
 create heating-[:`USED_FOR`]->HVAC
+create bio-[:`USED_FOR`]->heating
+create bio-[:`USED_FOR`]->cooling
+create bio-[:`USED_FOR`]->electricity
 ----
 
 == Graph
@@ -77,24 +80,32 @@ create heating-[:`USED_FOR`]->HVAC
 //graph 
 
 == Types of Nodes
-There are four types in this database. These types are:
+There are five types in this database. These types are:
 ENERGY: Energy describes a type of renewable energy. In these nodes, there is Solar Energy, Wind Power, Hydropower, Geothermal Energy, and Biofuel.
-TYPE: Type describes a source of renewable energy. ...
 APPLICATION: Application describes the real world use of each type of renewable energy. In these nodes, there is Domestic Applications, Windmills, 
 Propel Ships, Agriculture, Urban Planning, Alternative Transports, HVAC Systems, Conventional Hydroelectricity, Run-of-the-River Hydroelectricity, 
 and Pumped-Storage Hydroelectricity. 
 FUEL: Fuel desribes types of biofuel. In these nodes, there is Bioalchohols, Biodiesel, Vegetable Oil Fuel, and Syngas. 
 TRANSFORM: Transform describes different ways that the renewable sources of energy can be transformed. In these nodes, there is Electricity Production,
 Fuel Production, Ventilation, Cooling, and Heating. 
+FORM: Form describes different forms of renewable energy. In these nodes, there is Conventional Hydroelectricty, Run-of-the-River Hydroelecticity, 
+and Pumped-Storage Hydroelectricy.
 
 == Relationships
 There are two types of relationships in this database. These types are: 
 USED_FOR: This relationship is between two nodes where one node is used as an element of the second node. 
-AS: 
-FORM: 
+AS: Further defines a node into subcatergories.
+TYPE: The different forms that a renewable energy can take on.
 
 == Relationships between Nodes
-Each node to connected to different nodes by one of the relationships described above. 
+Each node is connected to a different node by one of the relationships described above. 
+-Energy nodes are connected to application nodes with the USED_FOR relationship.
+-Energy nodes are connected to transform nodes with the USED_FOR relationship.
+-Transform nodes are connected to application nodes with the USED_FOR relationship. 
+-Form nodes are connected to energy nodes with the TYPE relationship. 
+-Application nodes are connected to transform nodes with the AS relationship. 
+-Transform nodes are connected to fuel nodes with the AS relationship.
+
 
 == Queries
 

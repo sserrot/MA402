@@ -142,7 +142,7 @@ match (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, 
 //table
 
 == Takeaways from this Database
-
+This databse allows users to see some of the different real world applications of the different forms of renewable energies.
 
 
 

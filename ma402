@@ -57,6 +57,7 @@ create conventionalhydro-[:`TYPE`]->hydro
 create rotrhydro-[:`TYPE`]->hydro
 create pshydro-[:`TYPE`]->hydro
 create geo-[:`USED_FOR`]->electricity
+create geo-[:'USED_FOR']->heating
 create bio-[:`USED_FOR`]->heating
 create bio-[:`USED_FOR`]->fuel
 create domestic-[:`AS`]->heating

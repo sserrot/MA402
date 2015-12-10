@@ -108,29 +108,29 @@ Each node is connected to a different node by one of the relationships described
 
 == Queries
 
-=== Names of mainstream renewables-energies
+=== Names of Mainstream Renewables Energies
 
 [source, cypher]
 ----
 match (n:Energy) return distinct n.name as renewableEnergy;
 ----
-
+This query lists all of the energy nodes found in this database. These are the most common renewable energy sources used in the world. 
 
 //table
 
-=== What targets they chase?
-
+=== Transformations
+Often renewable energies have to be transformed to be useful. This table shows the transformations that we have covered in this database. 
 
 [source, cypher]
 ----
-match (n:Energy)-[*1..2]-(t:Transform) return distinct t.name as target, collect(n.name) as renewablesEnergies;
+match (n:Energy)-[*1..2]-(t:Transform) return distinct t.name as transform, collect(n.name) as renewablesEnergies;
 ----
 
 //table
 
-== Common uses
+== Common Uses
 
-
+To be useful, renewable energy must have applications in the modern world. This table shows what applications each energy type has. 
 [source, cypher]
 ----
 match (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, collect(n.name) as renewablesEnergies;
@@ -139,7 +139,6 @@ match (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, 
 //table
 
 == Takeaways from this database
-This database allows users to see some of the different real world applications of the different forms of renewable energies.
-
+Alternative energies have been increasing in popularity in recent decades due to decreasing fossil fuel supplies and increasing political tension between nations. As fossil fuels become more scarce, we will need to seek another source of energy to fulfill our day-to-day energy needs. This databse allows users to see some of the different real world applications of the different forms of renewable energies. By putting all of this information into one database the user can quickly see all of the useful applications and forms of alternative energy not only on a nation-wide scale but also on a personal level. If the user wishes reduce their reliability on fossil fuels, they can quickly search the database for the application they want to perform and see which alternative energies they can use to accomplish their goals. 
 
 

@@ -115,21 +115,24 @@ Each node is connected to a different node by one of the relationships described
 match (n:Energy) return distinct n.name as renewableEnergy;
 ----
 
+It is a well-known fact that great majority of people only knows five kinds of renewable-energies or even less. Before continue reading this Gist, can you say more than five? Exactly, you can't. Nobody! 
 
 //table
 
 === What targets they chase?
 
+As The Law of Conservation of Energy states, energy may neither be created nor destroyed but can change form! The next query show the most popular transformations.
 
 [source, cypher]
 ----
-match (n:Energy)-[*1..2]-(t:Transform) return distinct t.name as target, collect(n.name) as renewablesEnergies;
+match (n:Energy)-[*1..2]-(t:Target) return distinct t.name as target, collect(n.name) as renewablesEnergies;
 ----
 
 //table
 
 == Common uses
 
+Okay, so much random words but... what they do?
 
 [source, cypher]
 ----
@@ -138,8 +141,9 @@ match (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, 
 
 //table
 
-== Takeaways from this database
-This database allows users to see some of the different real world applications of the different forms of renewable energies.
+== Takeaways from this Database
+
+Alternative energies have been increasing in popularity in recent decades due to decreasing fossil fuel supplies and increasing political tension between nations. As fossil fuels become more scarce, we will need to seek another source of energy to fulfill our day-to-day energy needs. This databse allows users to see some of the different real world applications of the different forms of renewable energies. By putting all of this information into one database the user can quickly see all of the useful applications and forms of alternative energy not only on a nation-wide scale but also on a personal level. If the user wishes reduce their reliability on fossil fuels, they can quickly search the database for the application they want to perform and see which alternative energies they can use to accomplish their goals.  
 
 
 

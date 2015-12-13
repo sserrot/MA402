@@ -28,9 +28,9 @@ create (hydro:`Energy` {`name`:"Hydropower"})
 create (geo:`Energy` {`name`:"Geothermal Energy"})
 create (bio:`Energy` {`name`:"Biofuel"})
 create (domestic:`Application` {`name`:"Domestic applications"})
-create (windmill:`Application` {`name`:"Windmills"})
+create (windmill:`Form` {`name`:"Windmills"})
 create (electricity:`Trasform` {`name`:"Electricity production"})
-create (ships:`Application` {`name`:"Propel ships"})
+create (ships:`Form` {`name`:"Propel ships"})
 create (fuel:`Transform` {`name`:"Fuel production"})
 create (agriculture:`Application` {`name`:"Agriculture"})
 create (urban:`Application` {`name`:"Urban planning"})
@@ -54,8 +54,8 @@ create solar-[:`USED_FOR`]->agriculture
 create solar-[:`USED_FOR`]->electricity
 create solar-[:`USED_FOR`]->domestic
 create wind-[:`USED_FOR`]->electricity
-create wind-[:`USED_FOR`]->ships
-create wind-[:`USED_FOR`]->windmill
+create ships-[:`TYPE`]->wind
+create windmill-[:`TYPE`]->wind
 create hydro-[:`USED_FOR`]->electricity
 create passive-[:`USED_FOR`]->heating
 create active-[:`USED_FOR`]->electricity
@@ -65,7 +65,7 @@ create conventionalhydro-[:`TYPE`]->hydro
 create rotrhydro-[:`TYPE`]->hydro
 create pshydro-[:`TYPE`]->hydro
 create geo-[:`USED_FOR`]->electricity
-create geo-[:'USED_FOR']->heating
+create geo-[:`USED_FOR`]->heating
 create bio-[:`USED_FOR`]->heating
 create bio-[:`USED_FOR`]->fuel
 create domestic-[:`AS`]->heating
@@ -95,8 +95,8 @@ and Pumped-Storage Hydroelectricity.
 FUEL: Fuel describes types of biofuel. In these nodes, there is Bioalchohols, Biodiesel, Vegetable Oil Fuel, and Syngas. 
 TRANSFORM: Transform describes different ways that the renewable sources of energy can be transformed. In these nodes, there is Electricity Production,
 Fuel Production, Ventilation, Cooling, and Heating. 
-FORM: Form describes different forms of renewable energy. In these nodes, there is Conventional Hydroelectricity, Run-of-the-River Hydroelectricity, 
-and Pumped-Storage Hydroelectricity.
+FORM: Form describes different forms of renewable energy. In these nodes, there is Conventional Hydroelectricity, Run-of-the-River Hydroelectricity,
+Pumped-Storage Hydroelectricity, Passive Solar, and Active Solar. 
 
 == Relationships
 There are two types of relationships in this database. These types are: 
@@ -117,14 +117,16 @@ Each node is connected to a different node by one of the relationships described
 == Queries
 
 === Names of Mainstream Renewables Energies
+This query lists all of the energy nodes found in this database. These are the most common renewable energy sources used in the world.
 
 [source, cypher]
 ----
 match (n:Energy) return distinct n.name as renewableEnergy;
 ----
-This query lists all of the energy nodes found in this database. These are the most common renewable energy sources used in the world. 
-
+ 
 //table
+==Test Query
+match (n:Electricity)-[*1..3]-(e:Energy) return distinct e.name as energy, collect(e.name) as renewablesEnergies;
 
 === Transformations
 Often renewable energies have to be transformed to be useful. This table shows the transformations that we have covered in this database. 

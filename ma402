@@ -125,10 +125,11 @@ match (n:Energy) return distinct n.name as renewableEnergy;
 ----
 
 //table
-==Test Query
+
+==Sources of electricity
+This query shows what types of renewable energies produce electricity. 
 match (n:Transform)-[*1..2]-(e:Energy) return distinct e.name as energy, collect(e.name) as renewablesEnergies;
 
-Find all renewable energies that create electricity.
 
 === Transformations
 Often renewable energies have to be transformed to be useful. This table shows the transformations that we have covered in this database. 
@@ -151,4 +152,7 @@ match (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, 
 //table
 
 == Takeaways from this database
-Alternative energies have been increasing in popularity in recent decades due to decreasing fossil fuel supplies and increasing political tension between nations. As fossil fuels become more scarce, we will need to seek another source of energy to fulfill our day-to-day energy needs. This database allows users to see some of the different real world applications of the different forms of renewable energies. By putting all of this information into one database the user can quickly see all of the useful applications and forms of alternative energy not only on a nation-wide scale but also on a personal level. If the user wishes reduce their reliability on fossil fuels, they can quickly search the database for the application they want to perform and see which alternative energies they can use to accomplish their goals.
+Alternative energies have been increasing in popularity in recent decades due to decreasing fossil fuel supplies and increasing political tension between nations.
+As fossil fuels become more scarce, we will need to seek another source of energy to fulfill our day-to-day energy needs. This database allows users to see some of the different real world applications of the different forms of renewable energies.
+By putting all of this information into one database the user can quickly see all of the useful applications and forms of alternative energy not only on a nation-wide scale but also on a personal level. If the user wishes reduce their reliability on fossil fuels,
+they can quickly search the database for the application they want to perform and see which alternative energies they can use to accomplish their goals.

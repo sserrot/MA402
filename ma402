@@ -124,6 +124,14 @@ This query lists all of the energy nodes found in this database. These are the m
 match (n:Energy) return distinct n.name as renewableEnergy;
 ----
 
+MATCH ()-[r:USED_FOR]->() RETURN r LIMIT 25
+
+This query returns all the relationships that represent what each renewable energy is used for.
+
+MATCH ()-[r:TYPE]->() RETURN r LIMIT 25
+
+This query returns the different types of Solar, Wind, and Hydro power that can be produced.
+
 //table
 
 ==Sources of electricity

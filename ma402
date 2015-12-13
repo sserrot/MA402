@@ -9,7 +9,9 @@ Upon first inspection of the database, we saw that there were several changes th
 user friendly. We also added several connections and additional nodes to expand the database. Below is a list of the major changes we have made:
 -Improved grammar and language
 -Changed target node to transform
--Introduced new relationship between nodes
+-Introduced new relationships between nodes
+-Added new nodes and integrated them into the database
+-Added new queries
 
 
 //console
@@ -44,6 +46,8 @@ create (heating:`Transform` {`name`:"Heating"})
 create (conventionalhydro:`Form` {`name`:"Conventional hydroelectricity"})
 create (rotrhydro:`Form` {`name`:"Run-of-the-river hydroelectricity"})
 create (pshydro:`Form` {`name`:"Pumped-storage hydroelectricity"})
+create (active: `Form` {`name`:"Active solar"})
+create (passive:`Form`{`name`:"Passive solar"})
 create solar-[:`USED_FOR`]->alternative
 create solar-[:`USED_FOR`]->urban
 create solar-[:`USED_FOR`]->agriculture
@@ -53,6 +57,10 @@ create wind-[:`USED_FOR`]->electricity
 create wind-[:`USED_FOR`]->ships
 create wind-[:`USED_FOR`]->windmill
 create hydro-[:`USED_FOR`]->electricity
+create passive-[:`USED_FOR`]->heating
+create active-[:`USED_FOR`]->electricity
+create passive-[:`TYPE`]->solar
+create active-[:`TYPE`]->solar
 create conventionalhydro-[:`TYPE`]->hydro
 create rotrhydro-[:`TYPE`]->hydro
 create pshydro-[:`TYPE`]->hydro
@@ -84,16 +92,16 @@ ENERGY: Energy describes a type of renewable energy. In these nodes, there is So
 APPLICATION: Application describes the real world use of each type of renewable energy. In these nodes, there is Domestic Applications, Windmills, 
 Propel Ships, Agriculture, Urban Planning, Alternative Transports, HVAC Systems, Conventional Hydroelectricity, Run-of-the-River Hydroelectricity, 
 and Pumped-Storage Hydroelectricity. 
-FUEL: Fuel desribes types of biofuel. In these nodes, there is Bioalchohols, Biodiesel, Vegetable Oil Fuel, and Syngas. 
+FUEL: Fuel describes types of biofuel. In these nodes, there is Bioalchohols, Biodiesel, Vegetable Oil Fuel, and Syngas. 
 TRANSFORM: Transform describes different ways that the renewable sources of energy can be transformed. In these nodes, there is Electricity Production,
 Fuel Production, Ventilation, Cooling, and Heating. 
-FORM: Form describes different forms of renewable energy. In these nodes, there is Conventional Hydroelectricty, Run-of-the-River Hydroelecticity, 
-and Pumped-Storage Hydroelectricy.
+FORM: Form describes different forms of renewable energy. In these nodes, there is Conventional Hydroelectricity, Run-of-the-River Hydroelectricity, 
+and Pumped-Storage Hydroelectricity.
 
 == Relationships
 There are two types of relationships in this database. These types are: 
 USED_FOR: This relationship is between two nodes where one node is used as an element of the second node. 
-AS: Further defines a node into subcatergories.
+AS: Further defines a node into subcategories.
 TYPE: The different forms that a renewable energy can take on.
 
 == Relationships between Nodes
@@ -139,6 +147,6 @@ match (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, 
 //table
 
 == Takeaways from this database
-Alternative energies have been increasing in popularity in recent decades due to decreasing fossil fuel supplies and increasing political tension between nations. As fossil fuels become more scarce, we will need to seek another source of energy to fulfill our day-to-day energy needs. This databse allows users to see some of the different real world applications of the different forms of renewable energies. By putting all of this information into one database the user can quickly see all of the useful applications and forms of alternative energy not only on a nation-wide scale but also on a personal level. If the user wishes reduce their reliability on fossil fuels, they can quickly search the database for the application they want to perform and see which alternative energies they can use to accomplish their goals. 
+Alternative energies have been increasing in popularity in recent decades due to decreasing fossil fuel supplies and increasing political tension between nations. As fossil fuels become more scarce, we will need to seek another source of energy to fulfill our day-to-day energy needs. This database allows users to see some of the different real world applications of the different forms of renewable energies. By putting all of this information into one database the user can quickly see all of the useful applications and forms of alternative energy not only on a nation-wide scale but also on a personal level. If the user wishes reduce their reliability on fossil fuels, they can quickly search the database for the application they want to perform and see which alternative energies they can use to accomplish their goals. 
 
 

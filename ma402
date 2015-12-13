@@ -126,7 +126,9 @@ match (n:Energy) return distinct n.name as renewableEnergy;
 
 //table
 ==Test Query
-match (n:Electricity)-[*1..3]-(e:Energy) return distinct e.name as energy, collect(e.name) as renewablesEnergies;
+match (n:Transform)-[*1..2]-(e:Energy) return distinct e.name as energy, collect(e.name) as renewablesEnergies;
+
+Find all renewable energies that create electricity.
 
 === Transformations
 Often renewable energies have to be transformed to be useful. This table shows the transformations that we have covered in this database. 

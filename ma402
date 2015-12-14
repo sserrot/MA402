@@ -80,21 +80,20 @@ create heating-[:`USED_FOR`]->HVAC
 create bio-[:`USED_FOR`]->cooling
 create bio-[:`USED_FOR`]->electricity
 ----
-
 == Graph
 
 //graph 
 
 == Types of Nodes
 There are five types in this database. These types are:
-ENERGY: Energy describes a type of renewable energy. In these nodes, there is Solar Energy, Wind Power, Hydropower, Geothermal Energy, and Biofuel.
-APPLICATION: Application describes the real world use of each type of renewable energy. In these nodes, there is Domestic Applications, Windmills, 
+*ENERGY: Energy describes a type of renewable energy. In these nodes, there is Solar Energy, Wind Power, Hydropower, Geothermal Energy, and Biofuel.
+*APPLICATION: Application describes the real world use of each type of renewable energy. In these nodes, there is Domestic Applications, Windmills, 
 Propel Ships, Agriculture, Urban Planning, Alternative Transports, HVAC Systems, Conventional Hydroelectricity, Run-of-the-River Hydroelectricity, 
 and Pumped-Storage Hydroelectricity. 
-FUEL: Fuel describes types of biofuel. In these nodes, there is Bioalchohols, Biodiesel, Vegetable Oil Fuel, and Syngas. 
-TRANSFORM: Transform describes different ways that the renewable sources of energy can be transformed. In these nodes, there is Electricity Production,
+*FUEL: Fuel describes types of biofuel. In these nodes, there is Bioalchohols, Biodiesel, Vegetable Oil Fuel, and Syngas. 
+*TRANSFORM: Transform describes different ways that the renewable sources of energy can be transformed. In these nodes, there is Electricity Production,
 Fuel Production, Ventilation, Cooling, and Heating. 
-FORM: Form describes different forms of renewable energy. In these nodes, there is Conventional Hydroelectricity, Run-of-the-River Hydroelectricity,
+*FORM: Form describes different forms of renewable energy. In these nodes, there is Conventional Hydroelectricity, Run-of-the-River Hydroelectricity,
 Pumped-Storage Hydroelectricity, Passive Solar, and Active Solar. 
 
 == Relationships
@@ -115,56 +114,51 @@ Each node is connected to a different node by one of the relationships described
 
 == Queries
 
-//table
+
 === Names of Mainstream Renewables Energies
 This query lists all of the energy nodes found in this database. These are the most common renewable energy sources used in the world.
-
+//graph
 [source, cypher]
 ----
 MATCH (n:Energy) return distinct n.name as renewableEnergy;
 ----
 
-//table
 === Renewable Energy Uses
 This query returns all the relationships that represent what each renewable energy is used for.
-
+//graph
 [source, cypher]
 ----
 MATCH ()-[r:USED_FOR]->() RETURN r LIMIT 25;
 ----
 
-//table
+
 === Types of Solar, Wind and Hyropower
 This query returns the different types of Solar, Wind, and Hydro power that can be produced.
-
+//graph
 [source, cypher]
 ----
 MATCH ()-[r:TYPE]->() RETURN r LIMIT 25;
 ----
 
-//table
+
 === Sources of Electricity
 This query shows what types of renewable energies produce electricity. 
-
+//graph
 [source, cypher]
 ----
 MATCH (n:Transform)-[*1..2]-(e:Energy) return distinct e.name as energy, collect(e.name) as renewablesEnergies;
 ----
 
-//table
 === Transformations
 Often renewable energies have to be transformed to be useful. This table shows the transformations that we have covered in this database. 
-
+//graph
 [source, cypher]
 ----
 MATCH (n:Energy)-[*1..2]-(t:Transform) return distinct t.name as transform, collect(n.name) as renewablesEnergies;
 ----
-
-//table
-
 == Common Uses
-
 To be useful, renewable energy must have applications in the modern world. This table shows what applications each energy type has. 
+//graph
 [source, cypher]
 ----
 MATCH (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, collect(n.name) as renewablesEnergies;

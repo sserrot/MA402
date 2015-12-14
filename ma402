@@ -1,4 +1,5 @@
 = Quick Look at Mainstream Renewables Energies
+Sam Carter, Matt Cutler, Santiago Torres
 
 == Introduction
 
@@ -13,11 +14,9 @@ user friendly. We also added several connections and additional nodes to expand 
 -Added new nodes and integrated them into the database
 -Added new queries
 
-
 //console
 
 == Getting Started
-
 
 //hide
 [source, cypher]
@@ -116,35 +115,49 @@ Each node is connected to a different node by one of the relationships described
 
 == Queries
 
+//table
 === Names of Mainstream Renewables Energies
 This query lists all of the energy nodes found in this database. These are the most common renewable energy sources used in the world.
 
 [source, cypher]
 ----
-match (n:Energy) return distinct n.name as renewableEnergy;
+MATCH (n:Energy) return distinct n.name as renewableEnergy;
 ----
 
-MATCH ()-[r:USED_FOR]->() RETURN r LIMIT 25
-
+//table
+=== Renewable Energy Uses
 This query returns all the relationships that represent what each renewable energy is used for.
 
-MATCH ()-[r:TYPE]->() RETURN r LIMIT 25
-
-This query returns the different types of Solar, Wind, and Hydro power that can be produced.
+[source, cypher]
+----
+MATCH ()-[r:USED_FOR]->() RETURN r LIMIT 25;
+----
 
 //table
+=== Types of Solar, Wind and Hyropower
+This query returns the different types of Solar, Wind, and Hydro power that can be produced.
 
-==Sources of electricity
+[source, cypher]
+----
+MATCH ()-[r:TYPE]->() RETURN r LIMIT 25;
+----
+
+//table
+=== Sources of Electricity
 This query shows what types of renewable energies produce electricity. 
-match (n:Transform)-[*1..2]-(e:Energy) return distinct e.name as energy, collect(e.name) as renewablesEnergies;
 
+[source, cypher]
+----
+MATCH (n:Transform)-[*1..2]-(e:Energy) return distinct e.name as energy, collect(e.name) as renewablesEnergies;
+----
 
+//table
 === Transformations
 Often renewable energies have to be transformed to be useful. This table shows the transformations that we have covered in this database. 
 
 [source, cypher]
 ----
-match (n:Energy)-[*1..2]-(t:Transform) return distinct t.name as transform, collect(n.name) as renewablesEnergies;
+MATCH (n:Energy)-[*1..2]-(t:Transform) return distinct t.name as transform, collect(n.name) as renewablesEnergies;
 ----
 
 //table
@@ -154,10 +167,8 @@ match (n:Energy)-[*1..2]-(t:Transform) return distinct t.name as transform, coll
 To be useful, renewable energy must have applications in the modern world. This table shows what applications each energy type has. 
 [source, cypher]
 ----
-match (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, collect(n.name) as renewablesEnergies;
+MATCH (n:Energy)-[*1..2]-(a:Application) return distinct a.name as application, collect(n.name) as renewablesEnergies;
 ----
-
-//table
 
 == Takeaways from this database
 Alternative energies have been increasing in popularity in recent decades due to decreasing fossil fuel supplies and increasing political tension between nations.
